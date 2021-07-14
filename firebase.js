@@ -1,4 +1,6 @@
-var firebaseConfig = {
+import * as firebase from 'firebase';
+
+const firebaseConfig = {
   apiKey: 'AIzaSyBbPZ0NiueOsLdYrIBJCifFr1JVIMdJik4',
   authDomain: 'sigbuild.firebaseapp.com',
   projectId: 'sigbuild',
@@ -7,4 +9,16 @@ var firebaseConfig = {
   appId: '1:528189123292:web:d4e63dd0d02381a3162219',
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+
+let app;
+
+if (firebase.apps.length === 0) {
+  app = firebase.intializeApp(firebaseConfig);
+} else {
+  app = firebase.app();
+}
+
+const db = app.firestore();
+const auth = firebase.auth();
+
+export { db, auth };

@@ -4,7 +4,7 @@ import { KeyboardAvoidingView } from 'react-native';
 import { StyleSheet, View } from 'react-native';
 import { Input, Button, Text } from 'react-native-elements';
 import { useState, useLayoutEffect } from 'react';
-
+import { auth } from '../firebase';
 const RegisterScreen = ({ navigation }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -16,7 +16,19 @@ const RegisterScreen = ({ navigation }) => {
       headerBackTitle: 'Back to Login',
     });
   }, [navigation]);
-  const register = () => {};
+  const register = () => {
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then(authUser => {
+        authUser.user.update({
+          displayName: name,
+          photoURL:
+            imageUrl ||
+            'https://cencup.com/wp-content/uploads/2019/07/avatar-placeholder.png',
+        });
+      })
+      .catch(error => alert(error.message));
+  };
 
   return (
     <KeyboardAvoidingView behavior='padding' styles={styles.container}>

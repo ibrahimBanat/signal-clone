@@ -7,6 +7,8 @@ import LoginScreen from './screens/loginScreen';
 import { createStackNavigator } from '@react-navigation/stack';
 import RegisterScreen from './screens/RegisterScreen';
 import { white } from 'ansi-colors';
+import HomeScreen from './screens/HomeScreen';
+
 const Stack = createStackNavigator();
 
 const globalScreenoptions = {
@@ -27,6 +29,7 @@ export default function App() {
           component={LoginScreen}
         />
         <Stack.Screen name='Register' component={RegisterScreen} />
+        <Stack.Screen name='Home' component={HomeScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
